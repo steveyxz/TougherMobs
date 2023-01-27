@@ -1,0 +1,1 @@
+### Template for Spigot / Paper merge thing for 1.16.5+
