@@ -1,13 +1,13 @@
-name: SunnySpigotBaseCore
+name: TougherMobsCore
 version: '${project.version}'
-main: me.partlysunny.SunnySpigotBaseCore
+main: me.partlysunny.TougherMobsCore
 api-version: 1.16
 commands:
-  slb:
-    aliases: [ simpleluckyblocks, slb ]
-    description: SunnySpigotBase base command for ops
+  tmobs:
+    aliases: [ toughermobs, tmobs ]
+    description: TougherMobs base command for ops
 
 permissions:
-  slb.admin:
+  tmobs.admin:
     default: op
-    description: Admin commands (from /slb)
+    description: Admin commands (from /tmobs)

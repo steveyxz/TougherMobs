@@ -1,7 +1,7 @@
 package me.partlysunny;
 
-import me.partlysunny.commands.SLBCommand;
-import me.partlysunny.commands.SLBTabCompleter;
+import me.partlysunny.commands.TMobsCommand;
+import me.partlysunny.commands.TMobsTabCompleter;
 import me.partlysunny.commands.subcommands.HelpSubCommand;
 import me.partlysunny.gui.SelectGuiManager;
 import me.partlysunny.gui.textInput.ChatListener;
@@ -19,9 +19,9 @@ import java.security.CodeSource;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static me.partlysunny.commands.SLBCommand.command;
+import static me.partlysunny.commands.TMobsCommand.command;
 
-public final class SunnySpigotBaseCore extends JavaPlugin {
+public final class TougherMobsCore extends JavaPlugin {
 
     private static VersionManager manager;
 
@@ -36,14 +36,14 @@ public final class SunnySpigotBaseCore extends JavaPlugin {
     public void onEnable() {
         //Get version
         Version v = new Version(this.getServer().getVersion());
-        ConsoleLogger.console("Enabling SunnySpigotBase...");
+        ConsoleLogger.console("Enabling TougherMobs...");
         //Load modules (currently not used)
         manager = new VersionManager(this);
         manager.checkServerVersion();
         try {
             manager.load();
         } catch (ReflectiveOperationException e) {
-            ConsoleLogger.error("This version (" + v.get() + ") is not supported by SunnySpigotBase!", "Shutting down plugin...");
+            ConsoleLogger.error("This version (" + v.get() + ") is not supported by TougherMobs!", "Shutting down plugin...");
             setEnabled(false);
             return;
         }
@@ -59,7 +59,7 @@ public final class SunnySpigotBaseCore extends JavaPlugin {
         registerListeners();
         reload();
         registerGuis();
-        ConsoleLogger.console("Enabled SunnySpigotBase on version " + v.get());
+        ConsoleLogger.console("Enabled TougherMobs on version " + v.get());
     }
 
     @Override
@@ -67,7 +67,7 @@ public final class SunnySpigotBaseCore extends JavaPlugin {
         if (manager != null) {
             manager.disable();
         }
-        ConsoleLogger.console("Disabling SunnySpigotBase...");
+        ConsoleLogger.console("Disabling TougherMobs...");
     }
 
     private void registerGuis() {
@@ -76,14 +76,14 @@ public final class SunnySpigotBaseCore extends JavaPlugin {
 
     private void registerCommands() {
         //Register all sub commands here
-        SLBCommand.registerSubCommand(new HelpSubCommand());
+        TMobsCommand.registerSubCommand(new HelpSubCommand());
         PluginCommand mainCommand = getCommand(command);
         if (mainCommand == null) {
             ConsoleLogger.error("Main command doesn't exist! Check plugin.yml for more info");
             return;
         }
-        mainCommand.setExecutor(new SLBCommand());
-        mainCommand.setTabCompleter(new SLBTabCompleter());
+        mainCommand.setExecutor(new TMobsCommand());
+        mainCommand.setTabCompleter(new TMobsTabCompleter());
     }
 
     private void initDefaults() throws IOException {
@@ -99,7 +99,7 @@ public final class SunnySpigotBaseCore extends JavaPlugin {
         if (!f.exists()) {
             f.mkdir();
         }
-        CodeSource src = SunnySpigotBaseCore.class.getProtectionDomain().getCodeSource();
+        CodeSource src = TougherMobsCore.class.getProtectionDomain().getCodeSource();
         if (src != null) {
             URL jar = src.getLocation();
             ZipInputStream zip = new ZipInputStream(jar.openStream());
@@ -121,7 +121,7 @@ public final class SunnySpigotBaseCore extends JavaPlugin {
         if (!f.exists()) {
             f.mkdir();
         }
-        CodeSource src = SunnySpigotBaseCore.class.getProtectionDomain().getCodeSource();
+        CodeSource src = TougherMobsCore.class.getProtectionDomain().getCodeSource();
         if (src != null) {
             URL jar = src.getLocation();
             ZipInputStream zip = new ZipInputStream(jar.openStream());

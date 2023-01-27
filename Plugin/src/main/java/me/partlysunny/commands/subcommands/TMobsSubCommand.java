@@ -2,7 +2,7 @@ package me.partlysunny.commands.subcommands;
 
 import org.bukkit.command.CommandSender;
 
-public interface SLBSubCommand {
+public interface TMobsSubCommand {
 
     String getId();
 

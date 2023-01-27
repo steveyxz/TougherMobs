@@ -1,1 +1,1 @@
-### Template for Spigot / Paper merge thing for 1.16.5+
+### Plugin to make mobs tougher
