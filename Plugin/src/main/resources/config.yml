@@ -1,0 +1,8 @@
+tougheners:
+  ZOMBIE:
+    SPEED:
+      value: 2
+      operation: MULTIPLY_SCALAR_1
+    HEALTH:
+      value: 30
+      operation: ADD_NUMBER

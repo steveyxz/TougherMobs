@@ -5,10 +5,14 @@ import me.partlysunny.commands.TMobsTabCompleter;
 import me.partlysunny.commands.subcommands.HelpSubCommand;
 import me.partlysunny.gui.SelectGuiManager;
 import me.partlysunny.gui.textInput.ChatListener;
+import me.partlysunny.mobs.SpawnManager;
 import me.partlysunny.util.Util;
 import me.partlysunny.version.Version;
 import me.partlysunny.version.VersionManager;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,9 +28,14 @@ import static me.partlysunny.commands.TMobsCommand.command;
 public final class TougherMobsCore extends JavaPlugin {
 
     private static VersionManager manager;
+    private static FileConfiguration config;
 
     public static VersionManager manager() {
         return manager;
+    }
+
+    public static FileConfiguration config() {
+        return config;
     }
 
     public static void reload() {
@@ -51,6 +60,7 @@ public final class TougherMobsCore extends JavaPlugin {
         //Copy in default files if not existent
         try {
             initDefaults();
+            config = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "config.yml"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -141,5 +151,6 @@ public final class TougherMobsCore extends JavaPlugin {
     private void registerListeners() {
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new ChatListener(), this);
+        pluginManager.registerEvents(new SpawnManager(), this);
     }
 }

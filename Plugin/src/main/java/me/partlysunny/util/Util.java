@@ -4,15 +4,12 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.partlysunny.TougherMobsCore;
 import me.partlysunny.gui.textInput.ChatListener;
-import me.partlysunny.util.classes.Pair;
 import me.partlysunny.util.reflection.JavaAccessor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -163,18 +160,22 @@ public final class Util {
         return result;
     }
 
-    public static <T> T getOrDefault(ConfigurationSection y, String key, T def) {
-        if (y.contains(key)) {
-            return (T) y.get(key);
-        }
-        return def;
+    public static <T> T getOrDefault(ConfigurationSection y, String key, T def, Class<T> clazz) {
+        return y.getObject(key, clazz, def);
     }
 
-    public static <T> T getOrError(ConfigurationSection y, String key) {
+    public static <T> T getOrError(ConfigurationSection y, String key, Class<T> clazz) {
         if (y.contains(key)) {
-            return (T) y.get(key);
+            return y.getObject(key, clazz);
         }
         throw new IllegalArgumentException("Key " + key + " inside " + y.getName() + " was not found!");
+    }
+
+    public static <T> Optional<T> getOptional(ConfigurationSection y, String key, Class<T> clazz) {
+        if (y.contains(key)) {
+            return Optional.ofNullable(y.getObject(key, clazz));
+        }
+        return Optional.empty();
     }
 
     public static boolean isInvalidFilePath(String path) {

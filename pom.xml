@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.partlysunny</groupId>
-    <artifactId>SunnySpigotBase</artifactId>
+    <artifactId>TougherMobs</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
-    <name>SunnySpigotBase</name>
+    <name>TougherMobs</name>
 
     <description>Base plugin for 1.16+</description>
     <properties>

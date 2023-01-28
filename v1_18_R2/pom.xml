@@ -17,7 +17,7 @@
 
     <parent>
         <groupId>me.partlysunny</groupId>
-        <artifactId>SunnySpigotBase</artifactId>
+        <artifactId>TougherMobs</artifactId>
         <version>1.0</version>
     </parent>
 
