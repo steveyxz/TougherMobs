@@ -160,20 +160,23 @@ public final class Util {
         return result;
     }
 
-    public static <T> T getOrDefault(ConfigurationSection y, String key, T def, Class<T> clazz) {
-        return y.getObject(key, clazz, def);
+    public static <T> T getOrDefault(ConfigurationSection y, String key, T def) {
+        if (y.contains(key)) {
+            return (T) y.get(key);
+        }
+        return def;
     }
 
-    public static <T> T getOrError(ConfigurationSection y, String key, Class<T> clazz) {
+    public static <T> T getOrError(ConfigurationSection y, String key) {
         if (y.contains(key)) {
-            return y.getObject(key, clazz);
+            return (T) y.get(key);
         }
         throw new IllegalArgumentException("Key " + key + " inside " + y.getName() + " was not found!");
     }
 
-    public static <T> Optional<T> getOptional(ConfigurationSection y, String key, Class<T> clazz) {
+    public static <T> Optional<T> getOptional(ConfigurationSection y, String key) {
         if (y.contains(key)) {
-            return Optional.ofNullable(y.getObject(key, clazz));
+            return Optional.of((T) y.get(key));
         }
         return Optional.empty();
     }

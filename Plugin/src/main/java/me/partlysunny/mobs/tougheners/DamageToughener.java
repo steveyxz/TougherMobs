@@ -13,18 +13,18 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class HealthToughener implements IMobToughener {
+public class DamageToughener implements IMobToughener {
     @Override
     public String id() {
-        return "HEALTH";
+        return "DAMAGE";
     }
 
     @Override
     public void toughen(Mob mob, ConfigurationSection config) {
-        Optional<ConfigurationSection> healthSection = Util.getOptional(config, id());
-        AttributeInstance healthAttribute = mob.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-        if (healthAttribute != null && healthSection.isPresent()) {
-            ConfigurationSection healthConfig = healthSection.get();
+        Optional<ConfigurationSection> damageSection = Util.getOptional(config, id());
+        AttributeInstance damageAttribute = mob.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
+        if (damageAttribute != null && damageSection.isPresent()) {
+            ConfigurationSection healthConfig = damageSection.get();
             AttributeModifier.Operation operation;
             try {
                 operation = AttributeModifier.Operation.valueOf(Util.getOrDefault(healthConfig, "operation", "MULTIPLY_SCALAR_1"));
@@ -33,8 +33,7 @@ public class HealthToughener implements IMobToughener {
                 return;
             }
             Double value = Util.getOrDefault(healthConfig, "value", 0.0);
-            healthAttribute.addModifier(new AttributeModifier(id() + "_TOUGHEN", value, operation));
-            mob.setHealth(healthAttribute.getValue());
+            damageAttribute.addModifier(new AttributeModifier(id() + "_TOUGHEN", value, operation));
         }
     }
 }

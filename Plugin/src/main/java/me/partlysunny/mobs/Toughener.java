@@ -3,6 +3,7 @@ package me.partlysunny.mobs;
 import com.google.common.base.Preconditions;
 import me.partlysunny.ConsoleLogger;
 import me.partlysunny.TougherMobsCore;
+import me.partlysunny.mobs.tougheners.DamageToughener;
 import me.partlysunny.mobs.tougheners.HealthToughener;
 import me.partlysunny.mobs.tougheners.SpeedToughener;
 import org.bukkit.Bukkit;
@@ -14,6 +15,7 @@ import org.bukkit.entity.Mob;
 public enum Toughener {
 
     SPEED(new SpeedToughener()),
+    DAMAGE(new DamageToughener()),
     HEALTH(new HealthToughener())
     ;
 
