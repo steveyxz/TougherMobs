@@ -10,7 +10,6 @@ import me.partlysunny.util.Util;
 import me.partlysunny.version.Version;
 import me.partlysunny.version.VersionManager;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;

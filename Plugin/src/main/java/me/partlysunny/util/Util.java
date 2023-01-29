@@ -174,13 +174,6 @@ public final class Util {
         throw new IllegalArgumentException("Key " + key + " inside " + y.getName() + " was not found!");
     }
 
-    public static <T> Optional<T> getOptional(ConfigurationSection y, String key) {
-        if (y.contains(key)) {
-            return Optional.of((T) y.get(key));
-        }
-        return Optional.empty();
-    }
-
     public static boolean isInvalidFilePath(String path) {
         File f = new File(path);
         try {
