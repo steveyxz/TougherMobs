@@ -21,18 +21,18 @@ tougheners:
       type: SPEED
       value: 2.0
       operation: MULTIPLY_SCALAR_1
-      predicate: low_location
+      predicate: @low_location
       priority: 1
     BUFF_HEALTH:
       type: HEALTH
       value: 25.0
       operation: ADD_NUMBER
-      predicate: low_location
+      predicate: @low_location
       priority: 1
     BUFF_DAMAGE:
       type: DAMAGE
       value: 6.0
       operation: ADD_NUMBER
-      predicate: low_location
+      predicate: @low_location
       priority: 1
 

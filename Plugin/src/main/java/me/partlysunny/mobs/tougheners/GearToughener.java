@@ -12,6 +12,6 @@ public class GearToughener implements IMobToughener {
 
     @Override
     public void toughen(Mob mob, ConfigurationSection config) {
-
+        //
     }
 }

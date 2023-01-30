@@ -51,7 +51,7 @@ public enum Toughener {
                     assert config != null;
                     Optional<String> predicate = Util.getOptional(entitySpawnConfig, "predicate");
                     if (predicate.isPresent()) {
-                        CheckerPredicate ref = PredicateManager.get(predicate.get());
+                        CheckerPredicate ref = new CheckerPredicate(predicate.get());
                         if (!ref.process(getWorldContext(m))) {
                             continue;
                         }
@@ -81,6 +81,7 @@ public enum Toughener {
                         .put("light", String.valueOf(w.getBlockAt(location).getLightLevel()))
                         .put("skyLight", String.valueOf(w.getBlockAt(location).getLightFromSky()))
                         .put("blockLight", String.valueOf(w.getBlockAt(location).getLightFromBlocks()))
+                        .put("rng0->1", String.valueOf(Util.RAND.nextDouble()))
                         .build()
         );
     }
