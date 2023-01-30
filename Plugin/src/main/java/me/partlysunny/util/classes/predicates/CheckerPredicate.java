@@ -1,6 +1,7 @@
 package me.partlysunny.util.classes.predicates;
 
 import com.google.common.base.Preconditions;
+import me.partlysunny.mobs.PredicateManager;
 import me.partlysunny.util.classes.builders.HashMapBuilder;
 import me.partlysunny.util.classes.predicates.relationships.PredicateRelationship;
 import me.partlysunny.util.classes.predicates.relationships.Relationship;
@@ -110,6 +111,9 @@ public class CheckerPredicate {
         if (term.startsWith("?")) {
             return ctx.get(term.substring(1));
         }
+        if (term.startsWith("@")) {
+            return String.valueOf(PredicateManager.get(term.substring(1)).process(ctx));
+        }
         return term;
     }
 
@@ -179,6 +183,13 @@ public class CheckerPredicate {
                             throw new IllegalArgumentException("Left and right terms must both be parsable doubles in expression %s".formatted(expression));
                         }
                     }
+                }
+            } else if (expressionItems.length == 1 && expressionItems[0].startsWith("@")) {
+                String p = processTermWithContext(ctx, expressionItems[0]);
+                if (p.equals("true")) {
+                    return true;
+                } else if (p.equals("false")) {
+                    return false;
                 }
             }
             throw new IllegalArgumentException("Invalid expression found in predicate! %s".formatted(expression));
