@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class MobGear {
 
     private ItemStack offHand = null;
+    private ItemStack mainHand = null;
     private ItemStack[] armor = new ItemStack[4];
 
     private MobGear() {
@@ -23,6 +24,7 @@ public class MobGear {
         EntityEquipment equipment = e.getEquipment();
         equipment.setArmorContents(armor);
         equipment.setItemInOffHand(offHand);
+        equipment.setItemInMainHand(mainHand);
     }
 
     public static final class Builder {
@@ -41,6 +43,12 @@ public class MobGear {
             internal.offHand = i;
             return this;
         }
+
+        public Builder setMainHand(ItemStack i) {
+            internal.mainHand = i;
+            return this;
+        }
+
 
         public Builder setArmor(ItemStack... i) {
             internal.armor = i;

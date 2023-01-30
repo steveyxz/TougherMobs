@@ -375,6 +375,7 @@ public final class Util {
     }
 
     public static ItemStack loadItemFromConfig(ConfigurationSection itemInfo) {
+        if (itemInfo == null) return null;
         Material m = Material.valueOf(Util.getOrError(itemInfo, "material"));
         ItemBuilder b = ItemBuilder.builder(m);
         Optional<ConfigurationSection> optEnchants = Util.getOptional(itemInfo, "enchantments");
