@@ -23,17 +23,15 @@ public class SpeedToughener implements IMobToughener {
     @Override
     public void toughen(Mob mob, ConfigurationSection config) {
         AttributeInstance movementAttribute = mob.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-        Optional<ConfigurationSection> speedSection = Util.getOptional(config, id());
-        if (movementAttribute != null && speedSection.isPresent()) {
-            ConfigurationSection speedConfig = speedSection.get();
+        if (movementAttribute != null) {
             AttributeModifier.Operation operation;
             try {
-                operation = AttributeModifier.Operation.valueOf(Util.getOrDefault(speedConfig, "operation", "MULTIPLY_SCALAR_1"));
+                operation = AttributeModifier.Operation.valueOf(Util.getOrDefault(config, "operation", "MULTIPLY_SCALAR_1"));
             } catch (IllegalArgumentException e) {
                 ConsoleLogger.error("Configuration for %s on %s was invalid! Operation must be one of the following: %s".formatted(id(), mob.getType(), Arrays.stream(AttributeModifier.Operation.values()).map(Enum::toString).collect(Collectors.toList())));
                 return;
             }
-            Double value = Util.getOrDefault(speedConfig, "value", 0.0);
+            Double value = Util.getOrDefault(config, "value", 0.0);
             movementAttribute.addModifier(new AttributeModifier(id() + "_TOUGHEN", value, operation));
         }
     }

@@ -1,11 +1,38 @@
+predicates:
+  low_location: ?locy < 40 OR (?time > 13000 AND ?time < 22000 AND ?locy < 60) OR (?weather = STORMY AND ?locy < 60)
 tougheners:
   ZOMBIE:
-    SPEED:
-      value: 2.0
+    NORM_SPEED:
+      type: SPEED
+      value: 0.8
       operation: MULTIPLY_SCALAR_1
-    HEALTH:
-      value: 30.0
+      priority: 2
+    NORM_HEALTH:
+      type: HEALTH
+      value: 10.0
       operation: ADD_NUMBER
-    DAMAGE:
+      priority: 2
+    NORM_DAMAGE:
+      type: DAMAGE
       value: 3.0
       operation: ADD_NUMBER
+      priority: 2
+    BUFF_SPEED:
+      type: SPEED
+      value: 2.0
+      operation: MULTIPLY_SCALAR_1
+      predicate: low_location
+      priority: 1
+    BUFF_HEALTH:
+      type: HEALTH
+      value: 25.0
+      operation: ADD_NUMBER
+      predicate: low_location
+      priority: 1
+    BUFF_DAMAGE:
+      type: DAMAGE
+      value: 6.0
+      operation: ADD_NUMBER
+      predicate: low_location
+      priority: 1
+

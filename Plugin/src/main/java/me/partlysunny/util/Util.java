@@ -4,12 +4,12 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.partlysunny.TougherMobsCore;
 import me.partlysunny.gui.textInput.ChatListener;
+import me.partlysunny.util.classes.builders.EnchantBundle;
+import me.partlysunny.util.classes.builders.ItemBuilder;
 import me.partlysunny.util.reflection.JavaAccessor;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -172,6 +172,13 @@ public final class Util {
             return (T) y.get(key);
         }
         throw new IllegalArgumentException("Key " + key + " inside " + y.getName() + " was not found!");
+    }
+
+    public static <T> Optional<T> getOptional(ConfigurationSection y, String key) {
+        if (y.contains(key)) {
+            return Optional.of((T) y.get(key));
+        }
+        return Optional.empty();
     }
 
     public static boolean isInvalidFilePath(String path) {
@@ -365,6 +372,31 @@ public final class Util {
         if (f.exists() && !f.isDirectory()) {
             f.delete();
         }
+    }
+
+    public static ItemStack loadItemFromConfig(ConfigurationSection itemInfo) {
+        Material m = Material.valueOf(Util.getOrError(itemInfo, "material"));
+        ItemBuilder b = ItemBuilder.builder(m);
+        Optional<ConfigurationSection> optEnchants = Util.getOptional(itemInfo, "enchantments");
+        if (optEnchants.isPresent()) {
+            ConfigurationSection enchantments = optEnchants.get();
+            for (String enchant : enchantments.getKeys(false)) {
+                int lvl = Util.getOrError(enchantments, enchant);
+                b.addEnchantment(Enchantment.getByKey(NamespacedKey.minecraft(enchant)), lvl);
+            }
+        } else {
+            Optional<String> optBundle = Util.getOptional(itemInfo, "bundle");
+            if (optBundle.isPresent()) {
+                EnchantBundle bundle;
+                try {
+                    bundle = EnchantBundle.valueOf(optBundle.get());
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Bundle " + optBundle.get() + " does not exist!");
+                }
+                b.addEnchantment(bundle);
+            }
+        }
+        return b.build();
     }
 
     /**

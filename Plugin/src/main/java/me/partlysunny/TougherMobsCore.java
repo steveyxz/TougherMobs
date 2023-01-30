@@ -5,6 +5,7 @@ import me.partlysunny.commands.TMobsTabCompleter;
 import me.partlysunny.commands.subcommands.HelpSubCommand;
 import me.partlysunny.gui.SelectGuiManager;
 import me.partlysunny.gui.textInput.ChatListener;
+import me.partlysunny.mobs.PredicateManager;
 import me.partlysunny.mobs.SpawnManager;
 import me.partlysunny.util.Util;
 import me.partlysunny.version.Version;
@@ -37,7 +38,9 @@ public final class TougherMobsCore extends JavaPlugin {
         return config;
     }
 
+    //This method should reload config and things, allowing for live updates
     public static void reload() {
+        PredicateManager.load();
     }
 
     @Override

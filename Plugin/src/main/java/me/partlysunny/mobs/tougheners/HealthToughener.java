@@ -21,18 +21,16 @@ public class HealthToughener implements IMobToughener {
 
     @Override
     public void toughen(Mob mob, ConfigurationSection config) {
-        Optional<ConfigurationSection> healthSection = Util.getOptional(config, id());
         AttributeInstance healthAttribute = mob.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-        if (healthAttribute != null && healthSection.isPresent()) {
-            ConfigurationSection healthConfig = healthSection.get();
+        if (healthAttribute != null) {
             AttributeModifier.Operation operation;
             try {
-                operation = AttributeModifier.Operation.valueOf(Util.getOrDefault(healthConfig, "operation", "MULTIPLY_SCALAR_1"));
+                operation = AttributeModifier.Operation.valueOf(Util.getOrDefault(config, "operation", "MULTIPLY_SCALAR_1"));
             } catch (IllegalArgumentException e) {
                 ConsoleLogger.error("Configuration for %s on %s was invalid! Operation must be one of the following: %s".formatted(id(), mob.getType(), Arrays.stream(AttributeModifier.Operation.values()).map(Enum::toString).collect(Collectors.toList())));
                 return;
             }
-            Double value = Util.getOrDefault(healthConfig, "value", 0.0);
+            Double value = Util.getOrDefault(config, "value", 0.0);
             healthAttribute.addModifier(new AttributeModifier(id() + "_TOUGHEN", value, operation));
             mob.setHealth(healthAttribute.getValue());
         }

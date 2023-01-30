@@ -21,18 +21,16 @@ public class DamageToughener implements IMobToughener {
 
     @Override
     public void toughen(Mob mob, ConfigurationSection config) {
-        Optional<ConfigurationSection> damageSection = Util.getOptional(config, id());
         AttributeInstance damageAttribute = mob.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE);
-        if (damageAttribute != null && damageSection.isPresent()) {
-            ConfigurationSection healthConfig = damageSection.get();
+        if (damageAttribute != null) {
             AttributeModifier.Operation operation;
             try {
-                operation = AttributeModifier.Operation.valueOf(Util.getOrDefault(healthConfig, "operation", "MULTIPLY_SCALAR_1"));
+                operation = AttributeModifier.Operation.valueOf(Util.getOrDefault(config, "operation", "MULTIPLY_SCALAR_1"));
             } catch (IllegalArgumentException e) {
                 ConsoleLogger.error("Configuration for %s on %s was invalid! Operation must be one of the following: %s".formatted(id(), mob.getType(), Arrays.stream(AttributeModifier.Operation.values()).map(Enum::toString).collect(Collectors.toList())));
                 return;
             }
-            Double value = Util.getOrDefault(healthConfig, "value", 0.0);
+            Double value = Util.getOrDefault(config, "value", 0.0);
             damageAttribute.addModifier(new AttributeModifier(id() + "_TOUGHEN", value, operation));
         }
     }

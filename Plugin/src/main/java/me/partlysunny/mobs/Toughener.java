@@ -5,9 +5,12 @@ import me.partlysunny.TougherMobsCore;
 import me.partlysunny.mobs.tougheners.DamageToughener;
 import me.partlysunny.mobs.tougheners.HealthToughener;
 import me.partlysunny.mobs.tougheners.SpeedToughener;
+import me.partlysunny.util.Util;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Mob;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public enum Toughener {
 
@@ -35,7 +38,19 @@ public enum Toughener {
         //Must be a mob
         if (e instanceof Mob m) {
             for (Toughener toughener : values()) {
-                toughener.toughener.toughen(m, entitySpawnConfig);
+                ConfigurationSection toughenerConfig = null;
+                int currentPriority = Integer.MAX_VALUE;
+                for (String key : entitySpawnConfig.getKeys(false)) {
+                    ConfigurationSection config = (ConfigurationSection) entitySpawnConfig.get(key);
+                    assert config != null;
+                    Integer priority = Util.getOrDefault(config, "priority", Integer.MAX_VALUE);
+                    String type = Util.getOrError(config, "type");
+                    if (type.equals(toughener.toughener.id()) && priority <= currentPriority) {
+                        currentPriority = priority;
+                        toughenerConfig = config;
+                    }
+                }
+                toughener.toughener.toughen(m, toughenerConfig);
             }
         }
     }
