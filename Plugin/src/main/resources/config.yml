@@ -1,5 +1,5 @@
 predicates:
-  low_location: ?locy < 40 OR (?time > 13000 AND ?time < 22000 AND ?locy < 60) OR (?weather = STORMY AND ?locy < 60)
+  low_location: ?locY < 40 OR (?time > 13000 AND ?time < 22000 AND ?locY < 60) OR (?weather = THUNDER AND ?locY < 60)
 tougheners:
   ZOMBIE:
     NORM_SPEED:
