@@ -1,38 +1,58 @@
 predicates:
   low_location: ?locY < 40 OR (?time > 13000 AND ?time < 22000 AND ?locY < 60) OR (?weather = THUNDER AND ?locY < 60)
+  rng_1/5: ?rng0->1 < 0.2
+  rng_1/4: ?rng0->1 < 0.25
+  rng_1/3: ?rng0->1 < 0.333
+  rng_1/2: ?rng0->1 < 0.5
+
 tougheners:
   ZOMBIE:
     NORM_SPEED:
       type: SPEED
       value: 0.8
       operation: MULTIPLY_SCALAR_1
-      priority: 2
     NORM_HEALTH:
       type: HEALTH
       value: 10.0
       operation: ADD_NUMBER
-      priority: 2
     NORM_DAMAGE:
       type: DAMAGE
       value: 3.0
       operation: ADD_NUMBER
-      priority: 2
+    RNG_SPEED:
+      type: SPEED
+      value: 3
+      operation: MULTIPLY_SCALAR_1
+      predicate: @rng_1/5
+      priority: 1
+    RNG_HEALTH:
+      type: HEALTH
+      value: 50.0
+      operation: ADD_NUMBER
+      predicate: @rng_1/5
+      priority: 1
+    RNG_DAMAGE:
+      type: DAMAGE
+      value: 10.0
+      operation: ADD_NUMBER
+      predicate: @rng_1/5
+      priority: 1
     BUFF_SPEED:
       type: SPEED
       value: 2.0
       operation: MULTIPLY_SCALAR_1
       predicate: @low_location
-      priority: 1
+      priority: 2
     BUFF_HEALTH:
       type: HEALTH
       value: 25.0
       operation: ADD_NUMBER
       predicate: @low_location
-      priority: 1
+      priority: 2
     BUFF_DAMAGE:
       type: DAMAGE
       value: 6.0
       operation: ADD_NUMBER
       predicate: @low_location
-      priority: 1
+      priority: 2
 
