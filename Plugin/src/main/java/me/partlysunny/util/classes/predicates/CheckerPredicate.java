@@ -111,7 +111,7 @@ public class CheckerPredicate {
         if (term.startsWith("?")) {
             return ctx.get(term.substring(1));
         }
-        if (term.startsWith("@")) {
+        if (term.startsWith("$")) {
             return String.valueOf(PredicateManager.get(term.substring(1)).process(ctx));
         }
         return term;
@@ -184,7 +184,7 @@ public class CheckerPredicate {
                         }
                     }
                 }
-            } else if (expressionItems.length == 1 && expressionItems[0].startsWith("@")) {
+            } else if (expressionItems.length == 1 && expressionItems[0].startsWith("$")) {
                 String p = processTermWithContext(ctx, expressionItems[0]);
                 if (p.equals("true")) {
                     return true;

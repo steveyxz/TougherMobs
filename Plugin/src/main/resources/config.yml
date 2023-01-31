@@ -23,36 +23,36 @@ tougheners:
       type: SPEED
       value: 3
       operation: MULTIPLY_SCALAR_1
-      predicate: @rng_1/5
+      predicate: $rng_1/5
       priority: 1
     RNG_HEALTH:
       type: HEALTH
       value: 50.0
       operation: ADD_NUMBER
-      predicate: @rng_1/5
+      predicate: $rng_1/5
       priority: 1
     RNG_DAMAGE:
       type: DAMAGE
       value: 10.0
       operation: ADD_NUMBER
-      predicate: @rng_1/5
+      predicate: $rng_1/5
       priority: 1
     BUFF_SPEED:
       type: SPEED
       value: 2.0
       operation: MULTIPLY_SCALAR_1
-      predicate: @low_location
+      predicate: $low_location
       priority: 2
     BUFF_HEALTH:
       type: HEALTH
       value: 25.0
       operation: ADD_NUMBER
-      predicate: @low_location
+      predicate: $low_location
       priority: 2
     BUFF_DAMAGE:
       type: DAMAGE
       value: 6.0
       operation: ADD_NUMBER
-      predicate: @low_location
+      predicate: $low_location
       priority: 2
 
