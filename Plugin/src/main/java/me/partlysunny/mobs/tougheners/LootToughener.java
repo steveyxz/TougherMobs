@@ -53,18 +53,6 @@ public class LootToughener implements IMobToughener {
             this.entries = entries;
         }
 
-        public void drop(Location l) {
-            for (LootEntry entry : entries) {
-                if (Math.random() < entry.chance()) {
-                    int amount = (int) (Math.random() * (entry.maxAmount() - entry.minAmount() + 1)) + entry.minAmount();
-                    ItemStack item = entry.item().clone();
-                    item.setAmount(amount);
-                    assert l.getWorld() != null;
-                    l.getWorld().dropItemNaturally(l, item);
-                }
-            }
-        }
-
         public static LootTable fromConfig(ConfigurationSection config) {
             LootEntry[] entries = new LootEntry[config.getKeys(false).size()];
             int i = 0;
@@ -78,6 +66,18 @@ public class LootToughener implements IMobToughener {
                 i++;
             }
             return new LootTable(entries);
+        }
+
+        public void drop(Location l) {
+            for (LootEntry entry : entries) {
+                if (Math.random() < entry.chance()) {
+                    int amount = (int) (Math.random() * (entry.maxAmount() - entry.minAmount() + 1)) + entry.minAmount();
+                    ItemStack item = entry.item().clone();
+                    item.setAmount(amount);
+                    assert l.getWorld() != null;
+                    l.getWorld().dropItemNaturally(l, item);
+                }
+            }
         }
     }
 
