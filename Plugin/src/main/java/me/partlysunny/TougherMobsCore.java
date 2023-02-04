@@ -9,6 +9,7 @@ import me.partlysunny.mobs.PredicateManager;
 import me.partlysunny.mobs.SpawnManager;
 import me.partlysunny.mobs.tougheners.CreeperBombToughener;
 import me.partlysunny.mobs.tougheners.KnockbackToughener;
+import me.partlysunny.mobs.tougheners.LootToughener;
 import me.partlysunny.util.Util;
 import me.partlysunny.version.Version;
 import me.partlysunny.version.VersionManager;
@@ -161,6 +162,7 @@ public final class TougherMobsCore extends JavaPlugin {
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new ChatListener(), this);
         pluginManager.registerEvents(new SpawnManager(), this);
+        pluginManager.registerEvents(new LootToughener.LootListener(), this);
         pluginManager.registerEvents(new CreeperBombToughener.CreeperBombListener(), this);
         pluginManager.registerEvents(new KnockbackToughener.KnockbackHandler(), this);
     }
