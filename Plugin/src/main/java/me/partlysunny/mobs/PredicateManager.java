@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class PredicateManager {
 
-    private static final Map<String, CheckerPredicate> predicates = new HashMap<>();
     public static final String PREDICATE_KEY = "predicates";
+    private static final Map<String, CheckerPredicate> predicates = new HashMap<>();
 
     public static void register(String id, CheckerPredicate predicate) {
         predicates.put(id, predicate);

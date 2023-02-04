@@ -7,12 +7,15 @@ import me.partlysunny.gui.SelectGuiManager;
 import me.partlysunny.gui.textInput.ChatListener;
 import me.partlysunny.mobs.PredicateManager;
 import me.partlysunny.mobs.SpawnManager;
+import me.partlysunny.mobs.tougheners.CreeperBombToughener;
+import me.partlysunny.mobs.tougheners.KnockbackToughener;
 import me.partlysunny.util.Util;
 import me.partlysunny.version.Version;
 import me.partlysunny.version.VersionManager;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -41,6 +44,10 @@ public final class TougherMobsCore extends JavaPlugin {
     //This method should reload config and things, allowing for live updates
     public static void reload() {
         PredicateManager.load();
+    }
+
+    public static Plugin instance() {
+        return TougherMobsCore.getPlugin(TougherMobsCore.class);
     }
 
     @Override
@@ -154,5 +161,7 @@ public final class TougherMobsCore extends JavaPlugin {
         PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new ChatListener(), this);
         pluginManager.registerEvents(new SpawnManager(), this);
+        pluginManager.registerEvents(new CreeperBombToughener.CreeperBombListener(), this);
+        pluginManager.registerEvents(new KnockbackToughener.KnockbackHandler(), this);
     }
 }

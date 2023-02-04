@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -398,6 +399,14 @@ public final class Util {
             }
         }
         return b.build();
+    }
+
+    public static Vector randomVector(Double maxStrength) {
+        // Randomly generate a vector
+        double x = Math.random() * maxStrength * 2 - maxStrength;
+        double y = Math.random() * maxStrength * 2 - maxStrength;
+        double z = Math.random() * maxStrength * 2 - maxStrength;
+        return new Vector(x, y, z);
     }
 
     /**

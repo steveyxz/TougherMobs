@@ -22,6 +22,7 @@ public class CheckerPredicate {
     public static final CheckerPredicate FALSE = new CheckerPredicate("false");
     private final String predicate;
     private final List<String> chunks;
+
     public CheckerPredicate(String s) {
         this.predicate = s;
         this.chunks = chunk();
