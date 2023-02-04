@@ -24,6 +24,7 @@ public enum Toughener {
     KNOCKBACK(new KnockbackToughener()),
     NAME(new NameToughener()),
     CREEPER_BOMB(new CreeperBombToughener()),
+    LOOT(new LootToughener()),
     HEALTH(new HealthToughener());
 
     public static final String TOUGHENER_KEY = "tougheners";
@@ -46,8 +47,10 @@ public enum Toughener {
         //Must be a mob
         if (e instanceof Mob m) {
             for (Toughener toughener : values()) {
+                //This is the config for the current toughener
                 ConfigurationSection toughenerConfig = null;
                 int currentPriority = Integer.MAX_VALUE;
+                //Loop through all the tougheners and check predicate + sort by priority
                 for (String key : entitySpawnConfig.getKeys(false)) {
                     ConfigurationSection config = (ConfigurationSection) entitySpawnConfig.get(key);
                     assert config != null;
@@ -65,6 +68,7 @@ public enum Toughener {
                         toughenerConfig = config;
                     }
                 }
+                //If there is a valid config, toughen the mob with it
                 if (toughenerConfig != null) toughener.toughener.toughen(m, toughenerConfig);
             }
         }
