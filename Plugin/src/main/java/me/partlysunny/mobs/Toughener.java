@@ -2,10 +2,7 @@ package me.partlysunny.mobs;
 
 import me.partlysunny.ConsoleLogger;
 import me.partlysunny.TougherMobsCore;
-import me.partlysunny.mobs.tougheners.DamageToughener;
-import me.partlysunny.mobs.tougheners.GearToughener;
-import me.partlysunny.mobs.tougheners.HealthToughener;
-import me.partlysunny.mobs.tougheners.SpeedToughener;
+import me.partlysunny.mobs.tougheners.*;
 import me.partlysunny.util.Util;
 import me.partlysunny.util.classes.Weather;
 import me.partlysunny.util.classes.builders.HashMapBuilder;
@@ -24,6 +21,9 @@ public enum Toughener {
     SPEED(new SpeedToughener()),
     DAMAGE(new DamageToughener()),
     GEAR(new GearToughener()),
+    KNOCKBACK(new KnockbackToughener()),
+    NAME(new NameToughener()),
+    CREEPER_BOMB(new CreeperBombToughener()),
     HEALTH(new HealthToughener());
 
     public static final String TOUGHENER_KEY = "tougheners";
