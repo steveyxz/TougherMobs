@@ -15,8 +15,8 @@ public class NameToughener implements IMobToughener {
 
     @Override
     public void toughen(Mob mob, ConfigurationSection config) {
-        if (config.isString("name")) {
-            mob.setCustomName(config.getString("name"));
+        if (config.isString("value")) {
+            mob.setCustomName(config.getString("value"));
             mob.setCustomNameVisible(true);
         }
     }

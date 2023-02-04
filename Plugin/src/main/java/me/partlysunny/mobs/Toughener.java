@@ -84,6 +84,10 @@ public enum Toughener {
                         .put("skyLight", String.valueOf(w.getBlockAt(location).getLightFromSky()))
                         .put("blockLight", String.valueOf(w.getBlockAt(location).getLightFromBlocks()))
                         .put("rng0->1", String.valueOf(Util.RAND.nextDouble()))
+                        .put("nearbyMobs10All", String.valueOf(w.getNearbyEntities(location, 10, 10, 10).stream().filter(e -> e instanceof Mob).count()))
+                        .put("nearbyMobs5All", String.valueOf(w.getNearbyEntities(location, 5, 5, 5).stream().filter(e -> e instanceof Mob).count()))
+                        .put("nearbyMobs5Similar", String.valueOf(w.getNearbyEntities(location, 5, 5, 5).stream().filter(e -> e.getType().equals(m.getType())).count()))
+                        .put("nearbyMobs10Similar", String.valueOf(w.getNearbyEntities(location, 10, 10, 10).stream().filter(e -> e.getType().equals(m.getType())).count()))
                         .build()
         );
     }
