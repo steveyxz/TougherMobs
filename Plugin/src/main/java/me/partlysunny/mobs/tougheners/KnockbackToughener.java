@@ -21,8 +21,8 @@ public class KnockbackToughener implements IMobToughener {
     @Override
     public void toughen(Mob mob, ConfigurationSection config) {
         //Set knockback the mob deals to players
-        mob.setMetadata("knockback", new FixedMetadataValue(TougherMobsCore.instance(), Util.getOrError(config, "knockback")));
-        mob.setMetadata("lift", new FixedMetadataValue(TougherMobsCore.instance(), Util.getOrDefault(config, "lift", 0.0f)));
+        mob.setMetadata("knockback", new FixedMetadataValue(TougherMobsCore.instance(), Util.getOrDefault(config, "knockback", 1.0)));
+        mob.setMetadata("lift", new FixedMetadataValue(TougherMobsCore.instance(), Util.getOrDefault(config, "lift", 0.0)));
     }
 
     public static final class KnockbackHandler implements Listener {

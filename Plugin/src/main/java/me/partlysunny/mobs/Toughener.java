@@ -46,6 +46,7 @@ public enum Toughener {
         if (entitySpawnConfig == null) return;
         //Must be a mob
         if (e instanceof Mob m) {
+            PredicateContext worldContext = getWorldContext(m);
             for (Toughener toughener : values()) {
                 //This is the config for the current toughener
                 ConfigurationSection toughenerConfig = null;
@@ -54,10 +55,10 @@ public enum Toughener {
                 for (String key : entitySpawnConfig.getKeys(false)) {
                     ConfigurationSection config = (ConfigurationSection) entitySpawnConfig.get(key);
                     assert config != null;
-                    Optional<String> predicate = Util.getOptional(entitySpawnConfig, "predicate");
+                    Optional<String> predicate = Util.getOptional(config, "predicate");
                     if (predicate.isPresent()) {
                         CheckerPredicate ref = new CheckerPredicate(predicate.get());
-                        if (!ref.process(getWorldContext(m))) {
+                        if (!ref.process(worldContext)) {
                             continue;
                         }
                     }

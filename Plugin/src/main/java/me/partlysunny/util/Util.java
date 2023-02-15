@@ -384,7 +384,7 @@ public final class Util {
             ConfigurationSection enchantments = optEnchants.get();
             for (String enchant : enchantments.getKeys(false)) {
                 int lvl = Util.getOrError(enchantments, enchant);
-                b.addEnchantment(Enchantment.getByKey(NamespacedKey.minecraft(enchant)), lvl);
+                b.addEnchantment(Enchantment.getByKey(NamespacedKey.minecraft(enchant.toLowerCase())), lvl);
             }
         } else {
             Optional<String> optBundle = Util.getOptional(itemInfo, "bundle");

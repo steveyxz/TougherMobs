@@ -28,12 +28,11 @@ public class CreeperBombToughener implements IMobToughener {
     public void toughen(Mob mob, ConfigurationSection config) {
         if (mob instanceof Creeper creeper) {
             String explosionType = Util.getOrDefault(config, "explosionType", "default");
-            if (explosionType.equals("default")) {
-                Integer explosionRadius = Util.getOrDefault(config, "explosionRadius", creeper.getExplosionRadius());
-                Integer maxFuseTicks = Util.getOrDefault(config, "maxFuseTicks", creeper.getMaxFuseTicks());
-                creeper.setExplosionRadius(explosionRadius);
-                creeper.setMaxFuseTicks(maxFuseTicks);
-            } else if (explosionType.equals("special")) {
+            Integer explosionRadius = Util.getOrDefault(config, "explosionRadius", creeper.getExplosionRadius());
+            Integer maxFuseTicks = Util.getOrDefault(config, "maxFuseTicks", creeper.getMaxFuseTicks());
+            creeper.setExplosionRadius(explosionRadius);
+            creeper.setMaxFuseTicks(maxFuseTicks);
+            if (explosionType.equals("special")) {
                 Integer tntCount = Util.getOrDefault(config, "tntCount", 3);
                 Double tntLaunchStrength = Util.getOrDefault(config, "tntLaunchStrength", 1.0);
                 String particleType = Util.getOrDefault(config, "particleType", "");

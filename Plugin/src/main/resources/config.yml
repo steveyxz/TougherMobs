@@ -18,13 +18,13 @@ tougheners:
       type: DAMAGE
       priority: 1
       predicate: $king
-      value: 2
+      value: 2.0
       operation: ADD_SCALAR
     KING_HEALTH:
       type: HEALTH
       priority: 1
       predicate: $king
-      value: 5
+      value: 5.0
       operation: ADD_SCALAR
     KING_KNOCKBACK:
       type: KNOCKBACK
@@ -39,20 +39,61 @@ tougheners:
       mainHand:
         material: DIAMOND_SWORD
         enchantments:
-          - SHARPNESS: 2
-          - KNOCKBACK: 1
-          - FIRE_ASPECT: 1
+          SHARPNESS: 2
+          KNOCKBACK: 1
+          FIRE_ASPECT: 1
       helmet:
         material: GOLDEN_HELMET
         enchantments:
-          - PROTECTION_ENVIRONMENTAL: 2
+          PROTECTION: 2
       chestplate:
         material: NETHERITE_CHESTPLATE
         enchantments:
-          - PROTECTION_ENVIRONMENTAL: 2
+          PROTECTION: 2
     KING_NAME:
       type: NAME
       priority: 1
       predicate: $king
       value: "&cKing Zombie"
+    KING_LOOT:
+      type: LOOT
+      priority: 1
+      predicate: $king
+      loot:
+        ROTTEN_FLESH:
+          item:
+            material: ROTTEN_FLESH
+          minAmount: 2
+          maxAmount: 10
+          chance: 1.0
+        GOD_SWORD:
+          item:
+            material: NETHERITE_SWORD
+            enchantments:
+              SHARPNESS: 5
+              KNOCKBACK: 2
+              FIRE_ASPECT: 2
+          minAmount: 1
+          maxAmount: 1
+          chance: 0.5
+  CREEPER:
+    CREEPER_BOMBER:
+      type: BOMB
+      priority: 2
+      predicate: $rng_1/4
+      explosionType: default
+      explosionRadius: 7
+      maxFuseTicks: 20
+    CREEPER_STRIKER:
+      type: BOMB
+      priority: 1
+      predicate: $rng_1/5
+      explosionType: special
+      tntCount: 8
+      tntLaunchStrength: 1.5
+      particleType: CRIT
+      particleCount: 20
+      baseExplosionPower: 4
+      maxFuseTicks: 10
+
 
